@@ -106,7 +106,7 @@ const OrderTracking = () => {
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Seu telefone ou nº do pedido"
+              placeholder="CPF, telefone ou nº do pedido"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
