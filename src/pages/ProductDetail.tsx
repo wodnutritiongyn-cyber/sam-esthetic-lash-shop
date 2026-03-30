@@ -34,7 +34,13 @@ const ProductDetail = () => {
     : null;
 
   const handleAdd = () => {
-    for (let i = 0; i < qty; i++) addItem(product);
+    if (product.sizes && !selectedSize) {
+      toast.error('Selecione o tamanho antes de adicionar! 📏', {
+        duration: 2000,
+      });
+      return;
+    }
+    for (let i = 0; i < qty; i++) addItem(product, selectedSize || undefined);
     toast.success(`${qty}x adicionado ao carrinho! 🛍️`, {
       duration: 1500,
       style: { background: 'hsl(272 60% 45%)', color: '#fff', border: 'none' },
