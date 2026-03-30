@@ -11,6 +11,7 @@ import Cart from "./pages/Cart.tsx";
 import Checkout from "./pages/Checkout.tsx";
 import PaymentStatus from "./pages/PaymentStatus.tsx";
 import ThankYou from "./pages/ThankYou.tsx";
+import OrderTracking from "./pages/OrderTracking.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pagamento/status" element={<PaymentStatus />} />
             <Route path="/obrigado" element={<ThankYou />} />
+            <Route path="/meu-pedido" element={<OrderTracking />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <WhatsAppFloat />
