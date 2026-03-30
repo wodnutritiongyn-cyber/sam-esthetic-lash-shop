@@ -11,6 +11,13 @@ const Index = () => {
   const navigate = useNavigate();
   const featured = products.filter(p => p.featured);
 
+  // Track visit once per session
+  useEffect(() => {
+    if (sessionStorage.getItem('visit_tracked')) return;
+    sessionStorage.setItem('visit_tracked', '1');
+    supabase.functions.invoke('track-visit').catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen bg-background pb-24 md:pb-0">
       <Header />
