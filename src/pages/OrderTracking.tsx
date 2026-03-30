@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Search, Package, Clock, CheckCircle, XCircle, Loader2, Phone, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Search, Package, Clock, CheckCircle, XCircle, Loader2, MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
