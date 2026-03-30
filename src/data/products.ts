@@ -113,6 +113,7 @@ export const products: Product[] = [
   },
   {
     id: '9',
+    slug: 'anel-batoque-colas-divisoria-50-uni',
     name: 'Anel Batoque para Colas com Divisória — 50 uni',
     price: 13.00,
     image: '/products/anel-batoque.png',
