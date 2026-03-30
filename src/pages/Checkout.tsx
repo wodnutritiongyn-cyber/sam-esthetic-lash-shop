@@ -77,6 +77,7 @@ const Checkout = () => {
   const [selectedShipping, setSelectedShipping] = useState<ShippingOption | null>(null);
   const [loadingShipping, setLoadingShipping] = useState(false);
   const [shippingError, setShippingError] = useState('');
+  const [isLocalDelivery, setIsLocalDelivery] = useState(false);
 
   const finalTotal = totalPrice + (selectedShipping?.price || 0);
 
