@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { CheckCircle, XCircle, Clock, ArrowLeft, FileText } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, ArrowLeft } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
