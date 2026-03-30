@@ -88,7 +88,7 @@ const Checkout = () => {
             address: data.address,
             notes: data.notes || '',
           },
-          siteUrl: window.location.origin,
+          siteUrl: 'https://samestheticlash.shop',
         },
       });
 
@@ -119,10 +119,10 @@ const Checkout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-24 md:pb-8">
       <Header />
 
-      <div className="px-4 mt-4 animate-fade-in">
+      <div className="max-w-2xl mx-auto px-4 mt-4 animate-fade-in">
         <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-sm text-muted-foreground mb-4 font-medium">
           <ArrowLeft size={16} /> Voltar
         </button>
@@ -189,8 +189,7 @@ const Checkout = () => {
         </div>
 
         {/* Payment Buttons */}
-        <div className="mt-5 space-y-3">
-          {/* Mercado Pago */}
+        <div className="mt-5 space-y-3 pb-4">
           <button
             onClick={handleMercadoPago}
             disabled={loadingMP}
@@ -210,7 +209,6 @@ const Checkout = () => {
             <div className="flex-1 h-px bg-border/60" />
           </div>
 
-          {/* WhatsApp */}
           <button
             onClick={handleWhatsApp}
             className="w-full bg-[#25D366] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg hover:brightness-110 text-[15px] tracking-wide ring-1 ring-[#25D366]/30 opacity-0 animate-fade-in-up stagger-6"
@@ -220,7 +218,7 @@ const Checkout = () => {
           </button>
         </div>
 
-        <p className="text-[11px] text-muted-foreground text-center mt-4 mb-6">
+        <p className="text-[11px] text-muted-foreground text-center mt-2 mb-6">
           Pix, Cartão de Crédito e Boleto disponíveis via Mercado Pago
         </p>
       </div>
