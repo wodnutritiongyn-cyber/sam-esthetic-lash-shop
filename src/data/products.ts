@@ -38,6 +38,7 @@ export const products: Product[] = [
   },
   {
     id: '2',
+    slug: 'cilios-fadvan-5d-w',
     name: 'Cílios Fadvan 5D W',
     price: 43.99,
     image: '/products/cilios-fadvan-w5d.png',
