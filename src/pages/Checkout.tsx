@@ -225,10 +225,8 @@ const Checkout = () => {
     if (errors[field]) setErrors(prev => ({ ...prev, [field]: '' }));
   };
 
-  const InputField = ({ field, label, placeholder, icon, type = 'text', className = '', disabled = false }: {
-    field: string; label: string; placeholder: string; icon: React.ReactNode; type?: string; className?: string; disabled?: boolean;
-  }) => (
-    <div className={className}>
+  const renderInput = (field: string, label: string, placeholder: string, icon: React.ReactNode, type = 'text', className = '', disabled = false) => (
+    <div className={className} key={field}>
       <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5 block">
         {label}
       </label>
