@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const product = products.find(p => p.id === id);
 
