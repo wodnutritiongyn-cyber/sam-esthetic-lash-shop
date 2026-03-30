@@ -123,6 +123,7 @@ export const products: Product[] = [
   },
   {
     id: '10',
+    slug: 'aplicador-gloss-descartavel-glitter-50-uni',
     name: 'Aplicador Gloss Descartável Glitter — 50 uni',
     price: 8.99,
     image: '/products/aplicador-gloss.png',
