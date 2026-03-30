@@ -474,14 +474,39 @@ const Checkout = () => {
                     Frete
                   </h2>
 
-                  {loadingShipping && (
+                  {isLocalDelivery && (
+                    <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 rounded-xl p-4">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                          <MapPin size={16} className="text-green-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-foreground">📍 Entrega Local Disponível!</p>
+                          <p className="text-xs text-muted-foreground">Goiânia / Aparecida de Goiânia</p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground mb-3">
+                        Entregas nessa região são feitas via <strong>Uber</strong> ou <strong>99Pop</strong>. 
+                        Finalize seu pedido pelo WhatsApp para combinar a entrega.
+                      </p>
+                      <button
+                        onClick={handleWhatsApp}
+                        className="w-full bg-[#25D366] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2.5 hover:brightness-110 transition-all text-sm"
+                      >
+                        <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
+                        Finalizar pelo WhatsApp
+                      </button>
+                    </div>
+                  )}
+
+                  {!isLocalDelivery && loadingShipping && (
                     <div className="flex items-center gap-3 py-4 justify-center text-muted-foreground">
                       <Loader2 size={18} className="animate-spin text-primary" />
                       <span className="text-sm font-medium">Calculando frete...</span>
                     </div>
                   )}
 
-                  {!loadingShipping && shippingOptions.length > 0 && (
+                  {!isLocalDelivery && !loadingShipping && shippingOptions.length > 0 && (
                     <div className="space-y-2.5">
                       {shippingOptions.map(opt => (
                         <button
@@ -515,13 +540,13 @@ const Checkout = () => {
                     </div>
                   )}
 
-                  {!loadingShipping && shippingOptions.length === 0 && !shippingError && (
+                  {!isLocalDelivery && !loadingShipping && shippingOptions.length === 0 && !shippingError && (
                     <p className="text-sm text-muted-foreground py-2">
                       Preencha o CEP acima para calcular o frete.
                     </p>
                   )}
 
-                  {shippingError && (
+                  {!isLocalDelivery && shippingError && (
                     <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-3">
                       <p className="text-xs text-destructive font-medium">{shippingError}</p>
                     </div>
