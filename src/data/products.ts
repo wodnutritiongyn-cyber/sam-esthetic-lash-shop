@@ -50,6 +50,7 @@ export const products: Product[] = [
   },
   {
     id: '3',
+    slug: 'cilios-decemars-6d-w',
     name: 'Cílios Decemars 6D W',
     price: 44.99,
     image: '/products/cilios-decemars-6d.png',
