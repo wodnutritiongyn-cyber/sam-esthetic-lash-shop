@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           created_at: string
           customer_address: string
+          customer_cpf: string | null
           customer_name: string
           customer_notes: string | null
           customer_phone: string
@@ -33,6 +34,7 @@ export type Database = {
         Insert: {
           created_at?: string
           customer_address: string
+          customer_cpf?: string | null
           customer_name: string
           customer_notes?: string | null
           customer_phone: string
@@ -48,6 +50,7 @@ export type Database = {
         Update: {
           created_at?: string
           customer_address?: string
+          customer_cpf?: string | null
           customer_name?: string
           customer_notes?: string | null
           customer_phone?: string
@@ -67,6 +70,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      search_orders_by_cpf: {
+        Args: { cpf_query: string }
+        Returns: {
+          created_at: string
+          customer_name: string
+          external_reference: string
+          id: string
+          items: Json
+          payment_status: string
+          total: number
+        }[]
+      }
       search_orders_by_phone: {
         Args: { phone_query: string }
         Returns: {
