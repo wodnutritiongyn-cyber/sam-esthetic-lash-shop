@@ -8,6 +8,7 @@ export interface Product {
   description: string;
   featured?: boolean;
   sizes?: string[];
+  weight?: number; // peso em gramas
 }
 
 export const categories = [
