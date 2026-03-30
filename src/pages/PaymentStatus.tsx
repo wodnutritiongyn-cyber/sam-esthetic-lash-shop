@@ -47,10 +47,10 @@ const PaymentStatus = () => {
   const config = statusConfig[status] || statusConfig.unknown;
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-24 md:pb-8">
       <Header />
 
-      <div className="px-4 mt-4 animate-fade-in">
+      <div className="max-w-xl mx-auto px-4 mt-4 animate-fade-in">
         <button onClick={() => navigate('/')} className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 font-medium">
           <ArrowLeft size={16} /> Voltar ao início
         </button>

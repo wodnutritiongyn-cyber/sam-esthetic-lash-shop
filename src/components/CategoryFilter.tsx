@@ -7,7 +7,7 @@ interface Props {
 
 const CategoryFilter = ({ selected, onSelect }: Props) => {
   return (
-    <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide px-4">
+    <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide px-4 md:flex-wrap">
       {categories.map((cat, i) => (
         <button
           key={cat.id}

@@ -10,125 +10,131 @@ const Index = () => {
   const featured = products.filter(p => p.featured);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-24 md:pb-8">
       <Header />
 
-      {/* Hero Banner */}
-      <div className="mx-4 mt-4 rounded-3xl gradient-primary p-6 text-primary-foreground relative overflow-hidden animate-fade-in">
-        {/* Decorative circles */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full blur-xl" />
+      <div className="max-w-6xl mx-auto">
+        {/* Hero Banner */}
+        <div className="mx-4 mt-4 rounded-3xl gradient-primary p-6 md:p-10 text-primary-foreground relative overflow-hidden animate-fade-in">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full blur-xl" />
 
-        <div className="relative z-10">
-          <div className="flex items-center gap-1.5 mb-2">
-            <Sparkles size={14} className="animate-pulse-soft" />
-            <p className="text-xs font-semibold uppercase tracking-widest opacity-90">Bem-vinda à</p>
+          <div className="relative z-10 md:max-w-xl">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Sparkles size={14} className="animate-pulse-soft" />
+              <p className="text-xs font-semibold uppercase tracking-widest opacity-90">Bem-vinda à</p>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">
+              Sam Esthetic
+            </h1>
+            <p className="text-sm md:text-base mt-2 opacity-90 leading-relaxed font-light">
+              Materiais para Lash Design com os melhores preços da região! 💜
+            </p>
+            <button
+              onClick={() => navigate('/catalogo')}
+              className="mt-5 bg-white text-foreground px-7 py-3 rounded-full text-sm font-bold active:scale-[0.97] transition-all duration-200 shadow-lg hover:shadow-xl ring-1 ring-black/5 tracking-wide"
+            >
+              Ver Produtos →
+            </button>
           </div>
-          <h1 className="text-3xl font-extrabold leading-tight">
-            Sam Esthetic
-          </h1>
-          <p className="text-sm mt-2 opacity-90 leading-relaxed font-light">
-            Materiais para Lash Design com os melhores preços da região! 💜
-          </p>
+        </div>
+
+        {/* Search */}
+        <div className="px-4 mt-5">
           <button
             onClick={() => navigate('/catalogo')}
-            className="mt-5 bg-white text-foreground px-7 py-3 rounded-full text-sm font-bold active:scale-[0.97] transition-all duration-200 shadow-lg hover:shadow-xl ring-1 ring-black/5 tracking-wide"
+            className="flex items-center gap-3 w-full md:max-w-md bg-card rounded-2xl px-4 py-3.5 text-muted-foreground border border-border/60 shadow-card hover:shadow-elevated transition-all duration-300 opacity-0 animate-fade-in stagger-1"
           >
-            Ver Produtos →
+            <Search size={18} className="text-primary" />
+            <span className="text-sm">Buscar produtos...</span>
           </button>
         </div>
-      </div>
 
-      {/* Search */}
-      <button
-        onClick={() => navigate('/catalogo')}
-        className="mx-4 mt-5 flex items-center gap-3 w-[calc(100%-2rem)] bg-card rounded-2xl px-4 py-3.5 text-muted-foreground border border-border/60 shadow-card hover:shadow-elevated transition-all duration-300 opacity-0 animate-fade-in stagger-1"
-      >
-        <Search size={18} className="text-primary" />
-        <span className="text-sm">Buscar produtos...</span>
-      </button>
+        {/* Categories */}
+        <section className="mt-7 opacity-0 animate-fade-in stagger-2">
+          <h2 className="text-lg font-bold px-4 mb-4 text-foreground">Categorias</h2>
+          <div className="flex gap-2.5 overflow-x-auto px-4 pb-2 scrollbar-hide md:flex-wrap">
+            {categories.filter(c => c.id !== 'todos').map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => navigate(`/catalogo?cat=${cat.id}`)}
+                className="shrink-0"
+              >
+                <div className="px-4 py-2.5 rounded-full bg-card border border-border/60 shadow-card hover:shadow-elevated hover:scale-105 transition-all duration-300">
+                  <span className="text-sm font-semibold text-foreground whitespace-nowrap">{cat.label}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
 
-      {/* Categories */}
-      <section className="mt-7 opacity-0 animate-fade-in stagger-2">
-        <h2 className="text-lg font-bold px-4 mb-4 text-foreground">Categorias</h2>
-        <div className="flex gap-2.5 overflow-x-auto px-4 pb-2 scrollbar-hide">
-          {categories.filter(c => c.id !== 'todos').map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => navigate(`/catalogo?cat=${cat.id}`)}
-              className="shrink-0"
-            >
-              <div className="px-4 py-2.5 rounded-full bg-card border border-border/60 shadow-card hover:shadow-elevated hover:scale-105 transition-all duration-300">
-                <span className="text-sm font-semibold text-foreground whitespace-nowrap">{cat.label}</span>
-              </div>
+        {/* Featured */}
+        <section className="mt-7 px-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-foreground">🔥 Destaques</h2>
+            <button onClick={() => navigate('/catalogo')} className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity">
+              Ver todos →
             </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured */}
-      <section className="mt-7 px-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-foreground">🔥 Destaques</h2>
-          <button onClick={() => navigate('/catalogo')} className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity">
-            Ver todos →
-          </button>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {featured.map((p, i) => (
-            <ProductCard key={p.id} product={p} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* Info Cards */}
-      {/* Info Cards */}
-      <section className="px-4 mt-7 space-y-3 opacity-0 animate-fade-in-up stagger-4">
-        <div className="bg-card rounded-2xl border border-border/60 p-4 shadow-card flex items-center gap-4">
-          <div className="w-11 h-11 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow">
-            <Truck size={20} className="text-primary-foreground" />
           </div>
-          <div>
-            <p className="text-sm font-bold text-foreground">Entrega para toda a região</p>
-            <p className="text-xs text-muted-foreground mt-0.5">Consulte condições pelo WhatsApp</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+            {featured.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} />
+            ))}
           </div>
-        </div>
+        </section>
 
-        <div className="bg-card rounded-2xl border border-border/60 p-4 shadow-card flex items-center gap-4">
-          <div className="w-11 h-11 rounded-xl gradient-accent flex items-center justify-center flex-shrink-0">
-            <MessageCircle size={20} className="text-white" />
-          </div>
-          <div>
-            <p className="text-sm font-bold text-foreground">Atendimento via WhatsApp</p>
-            <p className="text-xs text-muted-foreground mt-0.5">(62) 99875-5213</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer Profissional */}
-      <footer className="mt-10 mb-24 px-4">
-        <div className="border-t border-border/40 pt-6 pb-4">
-          <div className="flex flex-col items-center gap-4">
-            <img src="/logo.png" alt="Sam Esthetic" className="h-10 w-auto opacity-80" />
-            <p className="text-xs text-muted-foreground text-center leading-relaxed max-w-[280px]">
-              Especialistas em materiais para Lash Design e Nail Designer. Qualidade premium com os melhores preços da região.
-            </p>
-            <div className="flex items-center gap-4 text-muted-foreground">
-              <a href="https://wa.me/5562998755213" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <MessageCircle size={18} />
-              </a>
-              <a href="https://www.instagram.com/sam_esthetic_" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-              </a>
+        {/* Info Cards */}
+        <section className="px-4 mt-7 opacity-0 animate-fade-in-up stagger-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="bg-card rounded-2xl border border-border/60 p-4 shadow-card flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0 shadow-glow">
+                <Truck size={20} className="text-primary-foreground" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">Entrega para toda a região</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Consulte condições pelo WhatsApp</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-[10px] text-muted-foreground/60 uppercase tracking-widest">
-              <span>© 2025 Sam Esthetic</span>
-              <span>•</span>
-              <span>Todos os direitos reservados</span>
+
+            <div className="bg-card rounded-2xl border border-border/60 p-4 shadow-card flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl gradient-accent flex items-center justify-center flex-shrink-0">
+                <MessageCircle size={20} className="text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">Atendimento via WhatsApp</p>
+                <p className="text-xs text-muted-foreground mt-0.5">(62) 99875-5213</p>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-10 mb-24 md:mb-8 px-4">
+          <div className="border-t border-border/40 pt-6 pb-4">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex flex-col md:flex-row items-center md:items-center gap-4">
+                <img src="/logo.png" alt="Sam Esthetic" className="h-10 w-auto opacity-80" />
+                <p className="text-xs text-muted-foreground text-center md:text-left leading-relaxed max-w-[320px]">
+                  Especialistas em materiais para Lash Design e Nail Designer. Qualidade premium com os melhores preços da região.
+                </p>
+              </div>
+              <div className="flex flex-col items-center md:items-end gap-3">
+                <div className="flex items-center gap-4 text-muted-foreground">
+                  <a href="https://wa.me/5562998755213" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <MessageCircle size={18} />
+                  </a>
+                  <a href="https://www.instagram.com/sam_esthetic_" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                </div>
+                <div className="text-[10px] text-muted-foreground/60 uppercase tracking-widest">
+                  © 2025 Sam Esthetic • Todos os direitos reservados
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
 
       <BottomNav />
     </div>

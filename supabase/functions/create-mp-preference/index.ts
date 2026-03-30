@@ -46,7 +46,7 @@ serve(async (req) => {
     });
 
     const externalReference = `order_${Date.now()}`;
-    const baseUrl = siteUrl || 'https://id-preview--e6490a71-39f9-4221-ade0-cd00fc5d911d.lovable.app';
+    const baseUrl = siteUrl || 'https://samestheticlash.shop';
 
     // Save order to database so webhook can retrieve it
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
