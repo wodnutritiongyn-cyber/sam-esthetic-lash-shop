@@ -1,5 +1,6 @@
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   price: number;
   originalPrice?: number;
@@ -10,6 +11,8 @@ export interface Product {
   sizes?: string[];
   weight?: number; // peso em gramas
 }
+
+export const getProductBySlug = (slug: string) => products.find(p => p.slug === slug);
 
 export const categories = [
   { id: 'todos', label: 'Todos' },
