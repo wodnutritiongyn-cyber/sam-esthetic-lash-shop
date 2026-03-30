@@ -83,6 +83,7 @@ export const products: Product[] = [
   },
   {
     id: '6',
+    slug: 'microbrush-glitter-lash-design-50-uni',
     name: 'Microbrush Glitter para Lash Design — 50 uni',
     price: 8.99,
     image: '/products/microbrush-glitter.png',
