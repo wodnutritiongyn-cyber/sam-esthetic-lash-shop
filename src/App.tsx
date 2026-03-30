@@ -11,6 +11,7 @@ import Cart from "./pages/Cart.tsx";
 import Checkout from "./pages/Checkout.tsx";
 import PaymentStatus from "./pages/PaymentStatus.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import WhatsAppFloat from "./components/WhatsAppFloat.tsx";
 
 const queryClient = new QueryClient();
 
