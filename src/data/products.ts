@@ -26,6 +26,7 @@ export const categories = [
 export const products: Product[] = [
   {
     id: '1',
+    slug: 'cilios-decemars-yy-brasileiro',
     name: 'Cílios Decemars YY Brasileiro',
     price: 2.50,
     image: '/products/cilios-decemars-yy.png',
