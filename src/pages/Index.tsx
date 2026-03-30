@@ -97,7 +97,7 @@ const Index = () => {
             </div>
             <div className="bg-card rounded-xl border border-border p-4 shadow-sm flex items-center gap-4">
               <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <MessageCircle size={20} className="text-primary" />
+                <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-sm font-bold text-foreground">Atendimento via WhatsApp</p>
