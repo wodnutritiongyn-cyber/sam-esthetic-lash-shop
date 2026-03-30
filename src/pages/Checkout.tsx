@@ -282,16 +282,14 @@ const Checkout = () => {
                 </h2>
 
                 <div className="space-y-4">
-                  <InputField field="name" label="Nome completo" placeholder="Seu nome completo" icon={<User size={16} />} />
+                  {renderInput('name', 'Nome completo', 'Seu nome completo', <User size={16} />)}
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <InputField field="cpf" label="CPF" placeholder="000.000.000-00" icon={<FileText size={16} />} />
-                    <InputField field="phone" label="Telefone / WhatsApp" placeholder="(00) 00000-0000" icon={<Phone size={16} />} />
+                    {renderInput('cpf', 'CPF', '000.000.000-00', <FileText size={16} />)}
+                    {renderInput('phone', 'Telefone / WhatsApp', '(00) 00000-0000', <Phone size={16} />)}
                   </div>
 
-                  <InputField field="email" label="E-mail" placeholder="seu@email.com" icon={
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                  } type="email" />
+                  {renderInput('email', 'E-mail', 'seu@email.com', <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>, 'email')}
                 </div>
 
                 <button
