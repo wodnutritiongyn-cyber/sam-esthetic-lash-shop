@@ -223,9 +223,11 @@ const Checkout = () => {
     const data = validate();
     if (!data) return;
 
-    const shippingText = selectedShipping
-      ? `*Frete:* ${selectedShipping.service} — R$ ${selectedShipping.price.toFixed(2)} (${selectedShipping.days} dias úteis)`
-      : '*Frete:* A combinar';
+    const shippingText = isLocalDelivery
+      ? '*Frete:* Entrega local (Goiânia/Aparecida) — combinar via app (Uber/99Pop)'
+      : selectedShipping
+        ? `*Frete:* ${selectedShipping.service} — R$ ${selectedShipping.price.toFixed(2)} (${selectedShipping.days} dias úteis)`
+        : '*Frete:* A combinar';
 
     const itemsList = items
       .map(i => {
