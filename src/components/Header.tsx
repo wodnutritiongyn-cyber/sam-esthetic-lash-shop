@@ -17,9 +17,9 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-2xl border-b border-border/30">
-      <div className="flex items-center justify-between h-16 md:h-20 px-4 max-w-6xl mx-auto">
-        {/* Mobile menu button */}
+    <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-2xl border-b border-border/40 shadow-sm">
+      <div className="flex items-center justify-between h-16 md:h-[72px] px-4 max-w-6xl mx-auto">
+        {/* Mobile: hamburger left */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-secondary transition-colors md:hidden"
@@ -27,15 +27,25 @@ const Header = () => {
           {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        {/* Desktop nav links (left) */}
+        {/* Desktop: logo LEFT */}
+        <button onClick={() => navigate('/')} className="hidden md:flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <img src="/logo.png" alt="Sam Esthetic" className="h-14 w-auto" />
+        </button>
+
+        {/* Mobile: logo CENTER */}
+        <button onClick={() => navigate('/')} className="flex items-center absolute left-1/2 -translate-x-1/2 md:hidden">
+          <img src="/logo.png" alt="Sam Esthetic" className="h-12 w-auto" />
+        </button>
+
+        {/* Desktop nav links (center) */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map(({ path, label }) => (
             <button
               key={path}
               onClick={() => navigate(path)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 isActive(path)
-                  ? 'bg-primary/10 text-primary font-semibold'
+                  ? 'bg-primary text-primary-foreground font-semibold'
                   : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
               }`}
             >
@@ -43,11 +53,6 @@ const Header = () => {
             </button>
           ))}
         </nav>
-
-        {/* Logo (center) */}
-        <button onClick={() => navigate('/')} className="flex items-center absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0">
-          <img src="/logo.png" alt="Sam Esthetic" className="h-12 md:h-14 w-auto" />
-        </button>
 
         {/* Cart (right) */}
         <button
@@ -73,7 +78,7 @@ const Header = () => {
                 onClick={() => { navigate(path); setMobileMenuOpen(false); }}
                 className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive(path)
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-primary text-primary-foreground font-semibold'
                     : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
                 }`}
               >
