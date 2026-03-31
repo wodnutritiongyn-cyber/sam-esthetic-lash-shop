@@ -621,11 +621,12 @@ export const products: Product[] = [
   {
     id: '9',
     slug: 'anel-batoque-colas-divisoria-50-uni',
-    name: 'Anéis com Divisão — 50 Unidades',
-    price: 13.05,
-    image: '/products/aneis-com-divisao.jpg',
+    name: 'Anel Batoque — 50 Unidades',
+    price: 13.00,
+    image: '/products/anel-batoque.png',
     category: 'descartaveis',
-    description: 'Anéis Batoque para Colas com Divisória. 50 unidades. Higiênico e descartável. Design ergonômico com divisória prática.',
+    description: 'Anel Batoque para Colas com Divisória — 50 unidades. Higiênico e descartável. Design ergonômico.',
+    featured: true,
     weight: 100,
   },
   {
