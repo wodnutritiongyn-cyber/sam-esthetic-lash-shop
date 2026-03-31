@@ -568,11 +568,12 @@ export const products: Product[] = [
   {
     id: '5',
     slug: 'pads-gel-protetor-palpebras-50-pares',
-    name: 'Pads em Gel Protetor de Pálpebras — 50 Pares',
-    price: 14.50,
-    image: '/products/pads-gel-50-new.jpg',
+    name: 'Pads em Gel — 50 Pares',
+    price: 18.50,
+    image: '/products/pads-gel-50.png',
     category: 'descartaveis',
-    description: 'Pads (Patch) em Gel Protetor de Pálpebras. 50 Pares. Gel suave e hidratante. Sem fiapos. Formato anatômico.',
+    description: 'Pads (Patch) em Gel Protetor de Pálpebras — 50 Pares. Gel suave e hidratante. Sem fiapos. Formato anatômico.',
+    featured: true,
     weight: 200,
   },
   {
