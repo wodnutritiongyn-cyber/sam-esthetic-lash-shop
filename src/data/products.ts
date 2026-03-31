@@ -895,11 +895,12 @@ export const products: Product[] = [
   {
     id: '8',
     slug: 'fita-transpore-extensao-cilios',
-    name: 'Fita Transpore Transparente',
-    price: 4.35,
-    image: '/products/fita-transpore-transparente.jpg',
+    name: 'Fita Transpore',
+    price: 4.00,
+    image: '/products/fita-transpore.png',
     category: 'ferramentas',
-    description: 'Fita Transpore Transparente para Extensão de Cílios. Respirável e perfurada. Fácil de cortar sem tesoura.',
+    description: 'Fita Transpore para Extensão de Cílios — Respirável e perfurada. Fácil de cortar sem tesoura.',
+    featured: true,
     weight: 30,
   },
   {
