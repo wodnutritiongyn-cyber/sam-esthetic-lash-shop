@@ -589,11 +589,12 @@ export const products: Product[] = [
   {
     id: '10',
     slug: 'aplicador-gloss-descartavel-glitter-50-uni',
-    name: 'Aplicador Gloss Descartável Glitter — 50 uni',
-    price: 5.08,
-    image: '/products/aplicador-gloss-new.jpg',
+    name: 'Aplicador Gloss — 50 Unidades',
+    price: 8.99,
+    image: '/products/aplicador-gloss.png',
     category: 'descartaveis',
-    description: 'Aplicador Gloss Descartável Glitter. Precisão na aplicação. Ponta de esponja macia. 50 unidades.',
+    description: 'Aplicador Gloss Descartável com Glitter — 50 unidades. Ponta de esponja macia para aplicação precisa.',
+    featured: true,
     weight: 80,
   },
   {
