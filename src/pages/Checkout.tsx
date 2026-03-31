@@ -79,7 +79,69 @@ const Checkout = () => {
   const [shippingError, setShippingError] = useState('');
   const [isLocalDelivery, setIsLocalDelivery] = useState(false);
 
+  // Pix payment state
+  const [pixData, setPixData] = useState<{
+    payment_id: number;
+    qr_code_base64: string;
+    qr_code: string;
+    external_reference: string;
+  } | null>(null);
+  const [pixCopied, setPixCopied] = useState(false);
+  const [pixStatus, setPixStatus] = useState<'pending' | 'approved' | 'rejected'>('pending');
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollingStartRef = useRef<number>(0);
+
   const finalTotal = totalPrice + (selectedShipping?.price || 0);
+
+  // Cleanup polling on unmount
+  useEffect(() => {
+    return () => {
+      if (pollingRef.current) clearInterval(pollingRef.current);
+    };
+  }, []);
+
+  // Start polling when pixData is set
+  useEffect(() => {
+    if (!pixData || pixStatus !== 'pending') return;
+
+    pollingStartRef.current = Date.now();
+    pollingRef.current = setInterval(async () => {
+      // Stop after 30 minutes
+      if (Date.now() - pollingStartRef.current > 30 * 60 * 1000) {
+        if (pollingRef.current) clearInterval(pollingRef.current);
+        toast.error('Tempo expirado. Gere um novo pagamento.');
+        setPixData(null);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase.functions.invoke('check-payment-status', {
+          body: { payment_id: pixData.payment_id },
+        });
+
+        if (error) return;
+
+        if (data?.status === 'approved') {
+          setPixStatus('approved');
+          if (pollingRef.current) clearInterval(pollingRef.current);
+          clearCart();
+          toast.success('Pagamento aprovado! 🎉');
+          navigate(`/obrigado?pedido=${pixData.external_reference}`);
+        } else if (data?.status === 'rejected' || data?.status === 'cancelled') {
+          setPixStatus('rejected');
+          if (pollingRef.current) clearInterval(pollingRef.current);
+          toast.error('Pagamento recusado. Tente novamente.');
+          setPixData(null);
+        }
+      } catch {
+        // ignore polling errors
+      }
+    }, 5000);
+
+    return () => {
+      if (pollingRef.current) clearInterval(pollingRef.current);
+    };
+  }, [pixData, pixStatus, clearCart, navigate]);
 
   if (items.length === 0) {
     navigate('/carrinho');
