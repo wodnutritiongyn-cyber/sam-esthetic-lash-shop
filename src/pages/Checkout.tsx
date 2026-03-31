@@ -644,41 +644,94 @@ const Checkout = () => {
                   />
                 </div>
 
-                {/* Payment Buttons */}
+                {/* Payment Section */}
                 <div className="bg-card rounded-2xl border border-border p-5 md:p-6 shadow-sm animate-fade-in">
                   <h2 className="text-base font-bold text-foreground flex items-center gap-2 mb-5">
                     <CreditCard size={18} className="text-primary" />
                     Forma de Pagamento
                   </h2>
 
-                  <div className="space-y-3">
-                    <button
-                      onClick={handleMercadoPago}
-                      disabled={loadingMP}
-                      className="w-full bg-[#009ee3] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 hover:brightness-110 transition-all text-sm disabled:opacity-60"
-                    >
-                      {loadingMP ? <Loader2 size={18} className="animate-spin" /> : <CreditCard size={18} />}
-                      {loadingMP ? 'Processando...' : 'Pagar com Mercado Pago'}
-                    </button>
+                  {/* Pix QR Code Display */}
+                  {pixData && pixStatus === 'pending' ? (
+                    <div className="space-y-4">
+                      <div className="bg-primary/5 border-2 border-primary/20 rounded-xl p-5 text-center">
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <Loader2 size={16} className="animate-spin text-primary" />
+                          <span className="text-sm font-semibold text-primary">Aguardando pagamento...</span>
+                        </div>
 
-                    <p className="text-[11px] text-muted-foreground text-center">
-                      Pix, Cartão de Crédito e Boleto disponíveis
-                    </p>
+                        <img
+                          src={`data:image/png;base64,${pixData.qr_code_base64}`}
+                          alt="QR Code Pix"
+                          className="mx-auto w-48 h-48 rounded-lg border border-border"
+                        />
 
-                    <div className="flex items-center gap-3">
-                      <div className="flex-1 h-px bg-border" />
-                      <span className="text-xs text-muted-foreground font-medium">ou</span>
-                      <div className="flex-1 h-px bg-border" />
+                        <p className="text-xs text-muted-foreground mt-3 mb-2">
+                          Escaneie o QR Code acima com seu app bancário
+                        </p>
+
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={pixData.qr_code}
+                            readOnly
+                            className="flex-1 bg-background rounded-lg px-3 py-2 text-xs text-foreground border border-border truncate font-mono"
+                          />
+                          <button
+                            onClick={handleCopyPix}
+                            className="flex items-center gap-1.5 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary/90 transition-all whitespace-nowrap"
+                          >
+                            {pixCopied ? <Check size={14} /> : <Copy size={14} />}
+                            {pixCopied ? 'Copiado!' : 'Copiar'}
+                          </button>
+                        </div>
+
+                        <p className="text-[10px] text-muted-foreground mt-3">
+                          ⏱️ O pagamento será confirmado automaticamente. Não feche esta página.
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          if (pollingRef.current) clearInterval(pollingRef.current);
+                          setPixData(null);
+                          setPixStatus('pending');
+                        }}
+                        className="w-full text-sm text-muted-foreground font-medium hover:text-foreground transition-colors py-2"
+                      >
+                        ← Cancelar e escolher outro método
+                      </button>
                     </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <button
+                        onClick={handlePixPayment}
+                        disabled={loadingMP}
+                        className="w-full bg-[#009ee3] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 hover:brightness-110 transition-all text-sm disabled:opacity-60"
+                      >
+                        {loadingMP ? <Loader2 size={18} className="animate-spin" /> : <QrCode size={18} />}
+                        {loadingMP ? 'Gerando QR Code...' : 'Pagar com Pix'}
+                      </button>
 
-                    <button
-                      onClick={handleWhatsApp}
-                      className="w-full bg-[#25D366] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 hover:brightness-110 transition-all text-sm"
-                    >
-                      <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
-                      Enviar Pedido via WhatsApp
-                    </button>
-                  </div>
+                      <p className="text-[11px] text-muted-foreground text-center">
+                        Pagamento instantâneo via Pix — aprovação imediata
+                      </p>
+
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 h-px bg-border" />
+                        <span className="text-xs text-muted-foreground font-medium">ou</span>
+                        <div className="flex-1 h-px bg-border" />
+                      </div>
+
+                      <button
+                        onClick={handleWhatsApp}
+                        className="w-full bg-[#25D366] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 hover:brightness-110 transition-all text-sm"
+                      >
+                        <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
+                        Enviar Pedido via WhatsApp
+                      </button>
+                    </div>
+                  )}
                 </div>
               </>
             )}
