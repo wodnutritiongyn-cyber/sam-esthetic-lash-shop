@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ShieldCheck, CreditCard, Loader2, Lock, MapPin, User, Phone, FileText, ChevronRight, Truck, Package, Copy, Check, QrCode, Clock } from 'lucide-react';
 import whatsappIcon from '@/assets/whatsapp-icon.png';
 import { useNavigate } from 'react-router-dom';
