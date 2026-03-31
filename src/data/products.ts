@@ -884,11 +884,12 @@ export const products: Product[] = [
   {
     id: '7',
     slug: 'fita-fosca-branca',
-    name: 'Fita Fosca Branca',
-    price: 2.90,
-    image: '/products/fita-fosca-branca.jpg',
+    name: 'Fita Micropore',
+    price: 4.00,
+    image: '/products/fita-micropore.png',
     category: 'ferramentas',
-    description: 'Fita Fosca Branca para extensão de cílios. Antialérgica e ideal para fixação durante o procedimento.',
+    description: 'Fita Micropore para extensão de cílios — Antialérgica e ideal para fixação durante o procedimento.',
+    featured: true,
     weight: 30,
   },
   {
