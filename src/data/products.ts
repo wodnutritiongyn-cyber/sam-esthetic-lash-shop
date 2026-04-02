@@ -1945,7 +1945,7 @@ export const products: Product[] = [
     name: 'Coleção Protagonista — Edição Alta Performance',
     price: 297.00,
     originalPrice: 489.90,
-    image: '/placeholder.svg',
+    image: '/products/kit-colecao-protagonista.jpg',
     category: 'kits',
     description: 'A Coleção Protagonista chegou para elevar o nível dos seus atendimentos. Reunimos os materiais mais desejados pelas profissionais que não abrem mão de qualidade e acabamento impecável.\n\n📦 Cílios Brasileiro YY (8mm, 10mm e 12mm)\n📦 Cílios 5D Fadvan W (8mm, 10mm e 12mm)\n📦 Cola HS 16 (3g) — Alta retenção\n📦 Pads, Microbrushes, Escovinhas e Aplicadores de Lip Gloss\n📦 Fitas: Micropore branca e Transpore transparente\n\n⚠️ Especial de Outono — Apenas 50 kits disponíveis.',
     featured: true,
