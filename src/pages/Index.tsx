@@ -71,7 +71,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Kit 1 — Master Beauty Set */}
-            <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden group">
+            <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden group cursor-pointer" onClick={() => navigate('/produto/kit-master-beauty-set')}>
               <div className="overflow-hidden">
                 <img src={promoMaster} alt="Kit Master Beauty Set: O Poder do Olhar" className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300" />
               </div>
@@ -94,14 +94,11 @@ const Index = () => {
                   <span className="text-xs text-muted-foreground line-through">R$ 529,00</span>
                   <span className="text-lg font-extrabold text-primary">R$ 307,00</span>
                 </div>
-                <a
-                  href="https://wa.me/5562998755213?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Kit%20Master%20Beauty%20Set%20por%20R%24307,00"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
                   className="block w-full text-center bg-primary text-primary-foreground font-bold text-sm py-3 rounded-xl hover:bg-primary/90 transition-colors"
                 >
-                  Garantir meu Kit via WhatsApp
-                </a>
+                  Comprar Agora
+                </button>
               </div>
             </div>
 
