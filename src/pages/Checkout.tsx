@@ -59,18 +59,35 @@ const formatCEP = (value: string) => {
   return `${digits.slice(0, 5)}-${digits.slice(5)}`;
 };
 
+const VALID_COUPONS: Record<string, number> = {
+  RECUPERA10: 0.10,
+  VOLTA15: 0.15,
+};
+
+const CUSTOMER_KEY = 'sam-customer-data';
+
 const Checkout = () => {
   const navigate = useNavigate();
   const { items, totalPrice, clearCart } = useCart();
-  const [form, setForm] = useState({
-    name: '', cpf: '', email: '', phone: '',
-    cep: '', street: '', number: '', complement: '',
-    neighborhood: '', city: '', state: '', notes: ''
+  const [form, setForm] = useState(() => {
+    try {
+      const saved = localStorage.getItem(CUSTOMER_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch { /* ignore */ }
+    return {
+      name: '', cpf: '', email: '', phone: '',
+      cep: '', street: '', number: '', complement: '',
+      neighborhood: '', city: '', state: '', notes: ''
+    };
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loadingMP, setLoadingMP] = useState(false);
   const [loadingCEP, setLoadingCEP] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
+
+  // Coupon state
+  const [couponInput, setCouponInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
 
   // Shipping state
   const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
@@ -91,7 +108,29 @@ const Checkout = () => {
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollingStartRef = useRef<number>(0);
 
-  const finalTotal = totalPrice + (selectedShipping?.price || 0);
+  // Persist customer data on every change
+  useEffect(() => {
+    try {
+      localStorage.setItem(CUSTOMER_KEY, JSON.stringify(form));
+    } catch { /* ignore */ }
+  }, [form]);
+
+  const discountAmount = appliedCoupon ? totalPrice * appliedCoupon.discount : 0;
+  const finalTotal = totalPrice - discountAmount + (selectedShipping?.price || 0);
+
+  const applyCoupon = () => {
+    const code = couponInput.trim().toUpperCase();
+    if (!code) return;
+    const discount = VALID_COUPONS[code];
+    if (discount) {
+      setAppliedCoupon({ code, discount });
+      toast.success(`Cupom ${code} aplicado! Você economizou ${(discount * 100).toFixed(0)}% 🎉`);
+      setCouponInput('');
+    } else {
+      toast.error('Cupom inválido ou expirado');
+    }
+  };
+
 
   // Cleanup polling on unmount
   useEffect(() => {
