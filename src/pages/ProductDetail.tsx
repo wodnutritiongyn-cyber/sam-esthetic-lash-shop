@@ -1,5 +1,5 @@
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Minus, Plus, Share2, Zap, ShieldCheck, Truck, Eye, Flame } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, ShoppingBag, Minus, Plus, Share2, Zap, Flame } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { getProductBySlug, products } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
@@ -16,7 +16,7 @@ const ProductDetail = () => {
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [imgLoaded, setImgLoaded] = useState(false);
+  
 
   const product = slug ? getProductBySlug(slug) : undefined;
 
