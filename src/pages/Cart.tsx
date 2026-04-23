@@ -1,12 +1,28 @@
 import { useNavigate } from 'react-router-dom';
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ShieldCheck } from 'lucide-react';
+import whatsappIcon from '@/assets/whatsapp-icon.png';
 import { useCart } from '@/contexts/CartContext';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 
+const WHATSAPP_NUMBER = '5562998755213';
+
 const Cart = () => {
   const navigate = useNavigate();
   const { items, updateQuantity, removeItem, totalPrice } = useCart();
+
+  const sendToWhatsApp = () => {
+    const itemsText = items
+      .map(({ product, quantity, selectedSize }) => {
+        const sizeText = selectedSize ? ` (${selectedSize})` : '';
+        return `▪️ ${quantity}x ${product.name}${sizeText} — R$ ${(product.price * quantity).toFixed(2)}`;
+      })
+      .join('\n');
+    const msg =
+      `🛍️ *Olá Sam Esthetic!*\n\nQuero finalizar este pedido:\n\n${itemsText}\n\n` +
+      `💰 *Subtotal: R$ ${totalPrice.toFixed(2)}*\n\nAguardo retorno para combinar entrega e pagamento. Obrigado!`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  };
 
   if (items.length === 0) {
     return (
