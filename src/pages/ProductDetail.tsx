@@ -218,14 +218,26 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              {/* Desktop add button */}
-              <button
-                onClick={handleAdd}
-                className="hidden md:flex w-full mt-6 bg-primary text-primary-foreground py-4 rounded-2xl font-bold items-center justify-center gap-2.5 active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg hover:bg-primary/90 text-[15px] tracking-wide"
-              >
-                <ShoppingBag size={19} strokeWidth={2.5} />
-                Adicionar — R$ {(product.price * qty).toFixed(2)}
-              </button>
+              {/* Desktop buttons */}
+              <div className="hidden md:grid grid-cols-2 gap-2 mt-6">
+                <button
+                  onClick={handleAdd}
+                  className="bg-secondary text-foreground py-4 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 hover:bg-secondary/80 text-sm border border-border"
+                >
+                  <ShoppingBag size={17} strokeWidth={2.5} />
+                  Adicionar
+                </button>
+                <button
+                  onClick={handleBuyNow}
+                  className="bg-gradient-to-r from-accent to-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg text-sm"
+                >
+                  <Zap size={17} fill="currentColor" />
+                  Comprar Agora
+                </button>
+              </div>
+              <p className="hidden md:flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-3">
+                🔒 Compra 100% segura · 🚚 Enviamos para todo Brasil
+              </p>
             </div>
           </div>
         </div>
@@ -243,14 +255,21 @@ const ProductDetail = () => {
         )}
       </div>
 
-      {/* Mobile Add Button */}
-      <div className="fixed bottom-[68px] left-0 right-0 p-4 glass-strong border-t border-border/50 md:hidden">
+      {/* Mobile Buttons */}
+      <div className="fixed bottom-[68px] left-0 right-0 p-3 glass-strong border-t border-border/50 md:hidden grid grid-cols-2 gap-2">
         <button
           onClick={handleAdd}
-          className="w-full bg-primary text-primary-foreground py-4 rounded-2xl font-bold flex items-center justify-center gap-2.5 active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg hover:bg-primary/90 text-[15px] tracking-wide"
+          className="bg-secondary text-foreground py-3.5 rounded-2xl font-bold flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all border border-border text-[13px]"
         >
-          <ShoppingBag size={19} strokeWidth={2.5} />
-          Adicionar — R$ {(product.price * qty).toFixed(2)}
+          <ShoppingBag size={16} strokeWidth={2.5} />
+          Adicionar
+        </button>
+        <button
+          onClick={handleBuyNow}
+          className="bg-gradient-to-r from-accent to-primary text-white py-3.5 rounded-2xl font-bold flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all shadow-md text-[13px]"
+        >
+          <Zap size={16} fill="currentColor" />
+          Comprar Agora
         </button>
       </div>
 
