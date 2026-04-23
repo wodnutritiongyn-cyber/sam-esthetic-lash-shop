@@ -128,6 +128,10 @@ const ProductDetail = () => {
               </span>
               <h1 className="text-xl md:text-2xl font-extrabold text-foreground mt-1.5 leading-tight">{product.name}</h1>
 
+              <div className="mt-2 flex items-center gap-2">
+                <StarRating rating={rating} reviewCount={reviewCount} size={14} />
+              </div>
+
               <div className="mt-4">
                 {product.originalPrice && (
                   <span className="text-xs text-muted-foreground line-through">
@@ -143,11 +147,34 @@ const ProductDetail = () => {
                     ,{product.price.toFixed(2).split('.')[1]}
                   </span>
                 </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  ou em até <span className="font-bold text-foreground">3x de R$ {(product.price / 3).toFixed(2)}</span> sem juros
+                </p>
+              </div>
+
+              {/* Provas sociais */}
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-foreground font-semibold">{viewersNow} pessoas vendo agora</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <Flame size={14} className="text-orange-500" />
+                  <span className="text-foreground font-semibold">{recentSales} vendidos nas últimas 24h</span>
+                </div>
+                {stockLeft <= 8 && (
+                  <div className="bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-900 rounded-lg px-3 py-2 flex items-center gap-2">
+                    <span className="text-xs font-bold text-orange-700 dark:text-orange-400">
+                      ⚡ Apenas {stockLeft} unidades em estoque!
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="h-px bg-border/60 my-4" />
 
               <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+
 
               {/* Size selector */}
               {product.sizes && product.sizes.length > 0 && (
