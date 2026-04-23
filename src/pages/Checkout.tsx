@@ -802,11 +802,52 @@ const Checkout = () => {
                 })}
               </div>
 
+              {/* Cupom */}
+              <div className="border-t border-border mt-4 pt-4">
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900 rounded-lg px-3 py-2">
+                    <div>
+                      <p className="text-xs font-bold text-green-700 dark:text-green-400">✓ {appliedCoupon.code}</p>
+                      <p className="text-[10px] text-muted-foreground">{(appliedCoupon.discount * 100).toFixed(0)}% de desconto aplicado</p>
+                    </div>
+                    <button
+                      onClick={() => setAppliedCoupon(null)}
+                      className="text-xs text-destructive font-semibold hover:underline"
+                    >
+                      Remover
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Cupom de desconto"
+                      value={couponInput}
+                      onChange={e => setCouponInput(e.target.value.toUpperCase())}
+                      onKeyDown={e => e.key === 'Enter' && applyCoupon()}
+                      className="flex-1 bg-background rounded-lg px-3 py-2 text-xs text-foreground border border-border outline-none focus:border-primary uppercase font-bold tracking-wider"
+                    />
+                    <button
+                      onClick={applyCoupon}
+                      className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary/90 transition-all"
+                    >
+                      Aplicar
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <div className="border-t border-border mt-4 pt-4 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="font-medium text-foreground">R$ {totalPrice.toFixed(2)}</span>
                 </div>
+                {appliedCoupon && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-green-600 font-semibold">Desconto ({appliedCoupon.code})</span>
+                    <span className="font-bold text-green-600">- R$ {discountAmount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Frete</span>
                   {selectedShipping ? (
@@ -822,6 +863,9 @@ const Checkout = () => {
                   <span className="text-sm font-bold text-foreground">Total</span>
                   <span className="text-xl font-extrabold text-primary">R$ {finalTotal.toFixed(2)}</span>
                 </div>
+                <p className="text-[10px] text-muted-foreground text-center pt-1">
+                  ou em até 3x de R$ {(finalTotal / 3).toFixed(2)} sem juros
+                </p>
               </div>
 
               {/* Trust badges */}
