@@ -10,6 +10,7 @@ import { products, categories } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
+import UrgencyBar from '@/components/UrgencyBar';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background pb-24 md:pb-0">
+      <UrgencyBar />
       <Header />
 
       <div className="max-w-6xl mx-auto">
