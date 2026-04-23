@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Minus, Plus, Share2 } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Minus, Plus, Share2, Zap, ShieldCheck, Truck, Eye, Flame } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { getProductBySlug, products } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
@@ -7,6 +7,8 @@ import { toast } from 'sonner';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import ProductCard from '@/components/ProductCard';
+import StarRating from '@/components/StarRating';
+import { getProductRating, getRecentSales, getStockLeft, getViewersNow } from '@/lib/socialProof';
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -61,6 +63,20 @@ const ProductDetail = () => {
       style: { background: 'hsl(272 60% 45%)', color: '#fff', border: 'none' },
     });
   };
+
+  const handleBuyNow = () => {
+    if (product.sizes && !selectedSize) {
+      toast.error('Selecione o tamanho antes de comprar! 📏', { duration: 2000 });
+      return;
+    }
+    for (let i = 0; i < qty; i++) addItem(product, selectedSize || undefined);
+    navigate('/checkout');
+  };
+
+  const { rating, reviewCount } = getProductRating(product.id);
+  const recentSales = getRecentSales(product.id);
+  const stockLeft = getStockLeft(product.id);
+  const viewersNow = getViewersNow(product.id);
 
   return (
     <div className="min-h-screen bg-background pb-44 md:pb-8">
