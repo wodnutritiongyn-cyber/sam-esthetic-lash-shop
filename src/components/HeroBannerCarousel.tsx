@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import bannerEntrega from '@/assets/banner-entrega-45min.jpg';
+import bannerEntrega from '@/assets/banner-entrega-45min.png';
 import bannerMasterBeauty from '@/assets/banner-master-beauty.jpg';
 import heroBanner from '@/assets/hero-banner.jpg';
 
