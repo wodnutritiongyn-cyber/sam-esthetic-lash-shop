@@ -63,6 +63,92 @@ const emptyProduct: Omit<DBProduct, 'id'> = {
   sort_order: 0,
 };
 
+interface SortableRowProps {
+  product: DBProduct;
+  catLabel: (id: string) => string;
+  onEdit: () => void;
+  onDelete: () => void;
+  onToggleActive: (active: boolean) => void;
+}
+
+const SortableProductRow = ({ product: p, catLabel, onEdit, onDelete, onToggleActive }: SortableRowProps) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: p.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 'auto',
+    opacity: isDragging ? 0.85 : 1,
+  };
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`flex flex-col md:grid md:grid-cols-[32px_48px_1fr_120px_100px_140px_100px] gap-2 items-center px-3 py-2 rounded-lg border bg-white hover:bg-slate-50 transition-colors ${!p.active ? 'opacity-60 bg-slate-50' : ''} ${isDragging ? 'shadow-lg border-primary' : 'border-slate-100'}`}
+    >
+      {/* Drag handle */}
+      <button
+        {...attributes}
+        {...listeners}
+        className="touch-none cursor-grab active:cursor-grabbing p-1 rounded hover:bg-slate-200 text-slate-400 self-start md:self-center"
+        aria-label="Arrastar"
+      >
+        <GripVertical size={18} />
+      </button>
+
+      {/* Image */}
+      <img
+        src={p.image}
+        alt={p.name}
+        className="w-10 h-10 object-contain rounded border border-slate-200 bg-slate-50 flex-shrink-0"
+        onError={e => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
+      />
+
+      {/* Name + mobile info */}
+      <div className="flex-1 min-w-0 w-full">
+        <p className="text-sm font-medium text-slate-900 truncate">{p.name}</p>
+        <div className="flex items-center gap-2 md:hidden mt-0.5">
+          <span className="text-xs text-slate-500">{catLabel(p.category)}</span>
+          <span className="text-xs font-semibold text-slate-800">R$ {Number(p.price).toFixed(2)}</span>
+          {p.featured && <Badge className="bg-primary text-[10px] px-1 py-0 h-4">Destaque</Badge>}
+        </div>
+      </div>
+
+      {/* Category - desktop */}
+      <span className="hidden md:block text-xs text-slate-600 truncate">{catLabel(p.category)}</span>
+
+      {/* Price - desktop */}
+      <span className="hidden md:block text-sm font-semibold text-slate-900">R$ {Number(p.price).toFixed(2)}</span>
+
+      {/* Active toggle (sempre visível) */}
+      <div className="flex items-center gap-2 self-start md:self-center w-full md:w-auto">
+        <Switch
+          checked={p.active}
+          onCheckedChange={onToggleActive}
+        />
+        <span className={`text-xs font-medium ${p.active ? 'text-emerald-600' : 'text-slate-400'}`}>
+          {p.active ? 'Ativo' : 'Inativo'}
+        </span>
+        {p.featured && <Badge className="bg-primary text-[10px] px-1.5 py-0 h-5 hidden md:inline-flex ml-1">Destaque</Badge>}
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-1 justify-end self-start md:self-center">
+        <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onEdit}>
+          <Pencil size={14} />
+        </Button>
+        <Button
+          size="icon"
+          variant="ghost"
+          className="h-8 w-8 text-red-500 hover:text-red-700"
+          onClick={onDelete}
+        >
+          <Trash2 size={14} />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 const AdminProducts = () => {
   const { token } = useAdminAuth();
   const [products, setProducts] = useState<DBProduct[]>([]);
