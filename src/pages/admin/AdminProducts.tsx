@@ -134,36 +134,48 @@ const AdminProducts = () => {
     }
   };
 
-  const handleReorder = async (productId: string, direction: 'up' | 'down') => {
-    const idx = products.findIndex(p => p.id === productId);
-    if (idx < 0) return;
-    const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-    if (swapIdx < 0 || swapIdx >= products.length) return;
+  const handleToggleActive = async (product: DBProduct, active: boolean) => {
+    // Optimistic
+    setProducts(prev => prev.map(p => p.id === product.id ? { ...p, active } : p));
+    try {
+      const { error } = await supabase.functions.invoke(`admin-products?action=update`, {
+        headers: { Authorization: `Bearer ${token}` },
+        body: { id: product.id, active },
+      });
+      if (error) throw error;
+      toast({ title: active ? 'Produto ativado' : 'Produto desativado' });
+    } catch {
+      // Revert
+      setProducts(prev => prev.map(p => p.id === product.id ? { ...p, active: !active } : p));
+      toast({ title: 'Erro ao alterar status', variant: 'destructive' });
+    }
+  };
 
-    const current = products[idx];
-    const swap = products[swapIdx];
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIdx = products.findIndex(p => p.id === active.id);
+    const newIdx = products.findIndex(p => p.id === over.id);
+    if (oldIdx < 0 || newIdx < 0) return;
+
+    const reordered = arrayMove(products, oldIdx, newIdx);
+    // Reassign sort_order sequentially
+    const updates = reordered.map((p, i) => ({ ...p, sort_order: i }));
+    setProducts(updates);
 
     try {
-      // Swap sort_order values
-      await Promise.all([
-        supabase.functions.invoke(`admin-products?action=update`, {
-          headers: { Authorization: `Bearer ${token}` },
-          body: { id: current.id, sort_order: swap.sort_order },
-        }),
-        supabase.functions.invoke(`admin-products?action=update`, {
-          headers: { Authorization: `Bearer ${token}` },
-          body: { id: swap.id, sort_order: current.sort_order },
-        }),
-      ]);
-
-      // Optimistic update
-      const updated = [...products];
-      updated[idx] = { ...current, sort_order: swap.sort_order };
-      updated[swapIdx] = { ...swap, sort_order: current.sort_order };
-      updated.sort((a, b) => a.sort_order - b.sort_order);
-      setProducts(updated);
+      await Promise.all(
+        updates.map(p =>
+          supabase.functions.invoke(`admin-products?action=update`, {
+            headers: { Authorization: `Bearer ${token}` },
+            body: { id: p.id, sort_order: p.sort_order },
+          })
+        )
+      );
     } catch {
       toast({ title: 'Erro ao reordenar', variant: 'destructive' });
+      fetchProducts();
     }
   };
 
