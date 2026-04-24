@@ -11,8 +11,26 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
-import { Plus, Search, Pencil, Trash2, Upload, Package, ChevronUp, ChevronDown, ImagePlus, X } from 'lucide-react';
+import { Plus, Search, Pencil, Trash2, Upload, Package, ImagePlus, X, GripVertical } from 'lucide-react';
 import { categories } from '@/data/products';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface DBProduct {
   id: string;
