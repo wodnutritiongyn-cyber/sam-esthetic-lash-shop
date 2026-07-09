@@ -290,7 +290,7 @@ const Index = () => {
                 <p className="text-xs text-muted-foreground text-center md:text-left leading-relaxed max-w-[320px]">
                   Especialistas em materiais para Lash Design e Nail Designer. Qualidade premium com os melhores preços do Brasil.
                 </p>
-                <p className="md:hidden font-hand text-xl text-primary">feito com 💗 em Goiânia</p>
+                <p className="font-hand text-xl text-primary">feito com 💗 em Goiânia</p>
               </div>
               <div className="flex flex-col items-center md:items-end gap-4">
                 <div className="flex items-center gap-4 text-muted-foreground">
