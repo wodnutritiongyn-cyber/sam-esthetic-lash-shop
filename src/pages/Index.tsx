@@ -207,8 +207,9 @@ const Index = () => {
           })}
 
 
-        {/* Comunidade Lash (só mobile) */}
-        <section className="md:hidden mt-10 px-4 relative">
+        {/* Comunidade Lash */}
+        <section className="mt-10 px-4 relative">
+
           <div className="rounded-3xl gradient-girly p-5 shadow-pink relative overflow-hidden">
             <img src={stStar} alt="" aria-hidden="true" className="sticker sticker-tilt-l absolute -top-3 -left-3 w-14 h-14" loading="lazy" />
             <img src={stHeart} alt="" aria-hidden="true" className="sticker sticker-tilt-r absolute -bottom-3 -right-3 w-14 h-14" loading="lazy" />
