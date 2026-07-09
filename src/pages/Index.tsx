@@ -42,20 +42,20 @@ const Index = () => {
         {/* Boas-vindas afetiva (só mobile) */}
         <WelcomeStrip />
 
-        {/* Hero Banner — com sticker Lashzinha espiando no canto (mobile) */}
+        {/* Hero Banner — sticker Lashzinha ao lado, fora do banner */}
         <div className="relative">
           <HeroBannerCarousel />
           <img
             src={stLashzinha}
             alt=""
             aria-hidden="true"
-            className="md:hidden sticker sticker-tilt-r absolute -top-3 -right-1 w-16 h-16 z-10"
+            className="sticker sticker-tilt-r absolute -top-2 -right-2 w-14 h-14 md:w-20 md:h-20 md:-top-6 md:-right-4 z-10"
             loading="lazy"
           />
         </div>
 
-        {/* Trust Bar com voz humana */}
-        <div className="mx-4 mt-4 grid grid-cols-3 gap-3">
+        {/* Trust Bar */}
+        <div className="mx-4 mt-6 grid grid-cols-3 gap-3">
           {[
             { icon: <ShieldCheck size={18} />, text: 'Segurinha 🔒' },
             { icon: <Truck size={18} />, text: 'Vai pro Brasil 📦' },
@@ -69,17 +69,11 @@ const Index = () => {
         </div>
 
         {/* Categorias */}
-        <section className="mt-7 relative">
-          <div className="px-4 mb-4 flex items-end gap-2">
-            <h2 className="font-hand text-3xl text-primary leading-none">o que você tá procurando, amor?</h2>
+        <section className="mt-8">
+          <div className="px-4 mb-4 flex items-center gap-3">
+            <h2 className="font-hand text-3xl md:text-4xl text-primary leading-none">o que você tá procurando, amor?</h2>
+            <img src={stCoffee} alt="" aria-hidden="true" className="sticker sticker-tilt-r w-10 h-10 md:w-14 md:h-14 shrink-0" loading="lazy" />
           </div>
-          <img
-            src={stCoffee}
-            alt=""
-            aria-hidden="true"
-            className="md:hidden sticker sticker-tilt-l absolute -top-3 right-3 w-14 h-14"
-            loading="lazy"
-          />
           <div className="flex gap-2.5 overflow-x-auto px-4 pb-2 scrollbar-hide md:flex-wrap">
             {categories.filter(c => c.id !== 'todos').map((cat) => (
               <button
@@ -94,19 +88,13 @@ const Index = () => {
         </section>
 
         {/* Kits Promocionais */}
-        <section className="mt-7 px-4 relative">
-          <div className="flex items-center gap-2 mb-3">
-            <Leaf size={16} className="text-primary" />
-            <h2 className="font-hand text-3xl text-primary leading-none">mimos da estação 🍂</h2>
+        <section className="mt-8 px-4">
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <Leaf size={16} className="text-primary shrink-0" />
+            <h2 className="font-hand text-3xl md:text-4xl text-primary leading-none">mimos da estação 🍂</h2>
+            <img src={stBow} alt="" aria-hidden="true" className="sticker sticker-tilt-l w-10 h-10 md:w-14 md:h-14 shrink-0" loading="lazy" />
             <span className="text-[10px] font-bold uppercase tracking-wider text-accent">Edição Limitada</span>
           </div>
-          <img
-            src={stBow}
-            alt=""
-            aria-hidden="true"
-            className="md:hidden sticker sticker-tilt-r absolute -top-2 right-4 w-14 h-14 z-10"
-            loading="lazy"
-          />
           <div className="grid grid-cols-2 gap-3">
             {/* Kit 1 */}
             <div
@@ -163,20 +151,16 @@ const Index = () => {
         </section>
 
         {/* Queridinhos da casa (destaques) */}
-        <section className="mt-8 px-4 relative">
-          <div className="flex items-end justify-between mb-4">
-            <h2 className="font-hand text-3xl text-primary leading-none">os queridinhos da casa 💕</h2>
-            <button onClick={() => navigate('/catalogo')} className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity">
+        <section className="mt-8 px-4">
+          <div className="flex items-center justify-between mb-4 gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <img src={stHeart} alt="" aria-hidden="true" className="sticker sticker-tilt-l w-10 h-10 md:w-14 md:h-14 shrink-0" loading="lazy" />
+              <h2 className="font-hand text-3xl md:text-4xl text-primary leading-none truncate">os queridinhos da casa 💕</h2>
+            </div>
+            <button onClick={() => navigate('/catalogo')} className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity shrink-0">
               Ver todos →
             </button>
           </div>
-          <img
-            src={stHeart}
-            alt=""
-            aria-hidden="true"
-            className="md:hidden sticker sticker-tilt-l absolute -top-4 left-2 w-12 h-12"
-            loading="lazy"
-          />
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
             {featured.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />
@@ -191,24 +175,21 @@ const Index = () => {
             const items = products.filter(p => p.category === cat.id).slice(0, 8);
             if (items.length === 0) return null;
             const decor = [stStar, stLash, stHeart, stBow][catIdx % 4];
+            const tilt = catIdx % 2 === 0 ? 'sticker-tilt-r' : 'sticker-tilt-l';
             return (
-              <section key={cat.id} className="mt-8 px-4 relative">
-                <div className="flex items-end justify-between mb-4">
-                  <h2 className="font-hand text-3xl text-primary leading-none">{cat.label.toLowerCase()}</h2>
+              <section key={cat.id} className="mt-8 px-4">
+                <div className="flex items-center justify-between mb-4 gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <img src={decor} alt="" aria-hidden="true" className={`sticker ${tilt} w-10 h-10 md:w-12 md:h-12 shrink-0`} loading="lazy" />
+                    <h2 className="font-hand text-3xl md:text-4xl text-primary leading-none truncate">{cat.label.toLowerCase()}</h2>
+                  </div>
                   <button
                     onClick={() => navigate(`/catalogo?cat=${cat.id}`)}
-                    className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity"
+                    className="text-xs text-primary font-bold uppercase tracking-wider hover:opacity-80 transition-opacity shrink-0"
                   >
                     Ver todos →
                   </button>
                 </div>
-                <img
-                  src={decor}
-                  alt=""
-                  aria-hidden="true"
-                  className={`md:hidden sticker ${catIdx % 2 === 0 ? 'sticker-tilt-r right-4' : 'sticker-tilt-l left-2'} absolute -top-4 w-12 h-12`}
-                  loading="lazy"
-                />
                 <div className="md:hidden flex gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 snap-x snap-mandatory">
                   {items.map((p, i) => (
                     <div key={p.id} className="shrink-0 w-[46%] snap-start">
@@ -224,6 +205,7 @@ const Index = () => {
               </section>
             );
           })}
+
 
         {/* Comunidade Lash (só mobile) */}
         <section className="md:hidden mt-10 px-4 relative">
