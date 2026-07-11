@@ -256,7 +256,7 @@ const AdminDashboard = () => {
       ) : (
         <>
           {/* Stats Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {statCards.map((card, i) => (
               <Card key={i} className="border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-4 md:p-5">
@@ -349,6 +349,38 @@ const AdminDashboard = () => {
                     <Area type="monotone" dataKey="visitas" name="Visitas" stroke="hsl(210, 80%, 55%)" strokeWidth={2.5} fill="url(#visitGradient)"
                       dot={{ r: 3, fill: 'white', stroke: 'hsl(210, 80%, 55%)', strokeWidth: 2 }}
                       activeDot={{ r: 5, fill: 'hsl(210, 80%, 55%)', stroke: 'white', strokeWidth: 2 }} />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </CardContent>
+            <Card className="border-slate-200/80 shadow-sm">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-sm md:text-base font-semibold text-slate-900">Pedidos iniciados (WhatsApp)</CardTitle>
+                    <p className="text-xs text-slate-400 mt-0.5">{periodLabel}</p>
+                  </div>
+                  <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-full">
+                    <MessageCircle size={14} className="text-emerald-500" />
+                    <span className="text-xs font-medium text-slate-600">{stats?.totalLeads || 0}</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <ResponsiveContainer width="100%" height={220}>
+                  <AreaChart data={leadsChartData}>
+                    <defs>
+                      <linearGradient id="leadGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="hsl(150, 60%, 45%)" stopOpacity={0.25} />
+                        <stop offset="100%" stopColor="hsl(150, 60%, 45%)" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                    <XAxis dataKey="date" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
+                    <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} allowDecimals={false} width={30} />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area type="monotone" dataKey="leads" name="Leads" stroke="hsl(150, 60%, 45%)" strokeWidth={2.5} fill="url(#leadGradient)"
+                      dot={{ r: 3, fill: 'white', stroke: 'hsl(150, 60%, 45%)', strokeWidth: 2 }}
+                      activeDot={{ r: 5, fill: 'hsl(150, 60%, 45%)', stroke: 'white', strokeWidth: 2 }} />
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
