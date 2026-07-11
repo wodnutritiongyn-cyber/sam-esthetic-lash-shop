@@ -285,7 +285,7 @@ const AdminDashboard = () => {
           </div>
 
           {/* Charts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
             <Card className="border-slate-200/80 shadow-sm">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
@@ -352,6 +352,8 @@ const AdminDashboard = () => {
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
+            </Card>
+
             <Card className="border-slate-200/80 shadow-sm">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
