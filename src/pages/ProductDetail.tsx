@@ -291,4 +291,23 @@ const ProductDetail = () => {
   );
 };
 
+const PromoCountdownBanner = ({ endsAt }: { endsAt: string | null | undefined }) => {
+  const cd = useCountdown(endsAt || null);
+  if (!endsAt || !cd || cd.expired) return null;
+  const label =
+    cd.d > 0
+      ? `${cd.d}d ${pad(cd.h)}:${pad(cd.m)}:${pad(cd.s)}`
+      : `${pad(cd.h)}:${pad(cd.m)}:${pad(cd.s)}`;
+  return (
+    <div className="mt-3 rounded-xl bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-[length:200%_100%] animate-gradient-x text-white px-3 py-2.5 flex items-center justify-between shadow-md">
+      <div className="flex items-center gap-2">
+        <span className="text-lg animate-pulse">⚡</span>
+        <span className="text-xs font-bold uppercase tracking-wider">Oferta termina em</span>
+      </div>
+      <span className="font-mono font-black text-base tracking-wider">{label}</span>
+    </div>
+  );
+};
+
 export default ProductDetail;
+
