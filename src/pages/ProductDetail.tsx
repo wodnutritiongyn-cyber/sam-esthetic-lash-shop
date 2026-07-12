@@ -9,6 +9,7 @@ import BottomNav from '@/components/BottomNav';
 import ProductCard from '@/components/ProductCard';
 import StarRating from '@/components/StarRating';
 import { getProductRating, getRecentSales, getStockLeft, getViewersNow } from '@/lib/socialProof';
+import { useCountdown, pad } from '@/hooks/useCountdown';
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -160,6 +161,9 @@ const ProductDetail = () => {
                 </p>
               </div>
 
+              {/* Cronômetro de promoção */}
+              <PromoCountdownBanner endsAt={product.promoActive ? product.promoEndsAt : null} />
+
               {/* Provas sociais */}
               <div className="mt-4 space-y-2">
                 <div className="flex items-center gap-2 text-xs">
@@ -181,7 +185,8 @@ const ProductDetail = () => {
 
               <div className="h-px bg-border/60 my-4" />
 
-              <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{product.description}</p>
+
 
 
               {/* Size selector */}
