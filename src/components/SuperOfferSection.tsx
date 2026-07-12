@@ -60,7 +60,7 @@ const OfferCard = ({ product }: { product: Product }) => {
         </h3>
 
         {/* Countdown */}
-        <div className="flex items-center justify-center gap-1 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-[length:200%_100%] animate-[gradient_3s_linear_infinite] text-white font-mono font-black text-sm py-1.5 rounded-lg shadow-inner tracking-wider">
+        <div className="flex items-center justify-center gap-1 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-[length:200%_100%] animate-gradient-x text-white font-mono font-black text-sm py-1.5 rounded-lg shadow-inner tracking-wider">
           ⏰ {timeLabel}
         </div>
 
@@ -110,7 +110,7 @@ const SuperOfferSection = ({ products }: Props) => {
       className="relative mt-6 mx-4 rounded-3xl overflow-hidden shadow-xl"
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-pink-500 via-orange-500 to-red-600 bg-[length:200%_200%] animate-[gradient_6s_ease_infinite]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-red-500 via-pink-500 via-orange-500 to-red-600 bg-[length:200%_200%] animate-gradient-x" />
       {/* Sparkle texture */}
       <div className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
