@@ -46,6 +46,8 @@ interface DBProduct {
   weight: number;
   active: boolean;
   sort_order: number;
+  promo_active?: boolean;
+  promo_ends_at?: string | null;
   _priceRaw?: string;
 }
 
@@ -61,6 +63,8 @@ const emptyProduct: Omit<DBProduct, 'id'> = {
   weight: 50,
   active: true,
   sort_order: 0,
+  promo_active: false,
+  promo_ends_at: null,
 };
 
 interface SortableRowProps {
