@@ -193,13 +193,9 @@ const ProductDetail = () => {
 
               <div className="h-px bg-border/60 my-4" />
 
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{product.description}</p>
-
-
-
               {/* Size selector */}
               {product.sizes && product.sizes.length > 0 && (
-                <div className="mt-5">
+                <div>
                   <span className="text-sm font-semibold text-foreground">Tamanho</span>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {product.sizes.map(size => (
@@ -239,27 +235,38 @@ const ProductDetail = () => {
                 </div>
               </div>
 
+              {/* Descrição — depois das opções de compra */}
+              <div className="mt-6 pt-5 border-t border-border/60">
+                <span className="text-sm font-semibold text-foreground">Descrição</span>
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line mt-2">{product.description}</p>
+              </div>
+
               {/* Desktop buttons */}
-              <div className="hidden md:grid grid-cols-2 gap-2 mt-6">
+              <div className="hidden md:grid grid-cols-3 gap-2 mt-6">
                 <button
                   onClick={handleAdd}
-                  className="bg-secondary text-foreground py-4 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 hover:bg-secondary/80 text-sm border border-border"
+                  className="col-span-1 bg-secondary text-foreground py-4 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 hover:bg-secondary/80 text-sm border border-border"
                 >
                   <ShoppingBag size={17} strokeWidth={2.5} />
                   Adicionar
                 </button>
                 <button
                   onClick={handleBuyNow}
-                  className="bg-gradient-to-r from-accent to-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg text-sm"
+                  className={`col-span-2 py-4 rounded-2xl font-extrabold flex items-center justify-center gap-2 active:scale-[0.98] transition-all duration-200 shadow-elevated hover:shadow-lg text-base text-white uppercase tracking-wide ${
+                    isPromo
+                      ? 'bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-[length:200%_100%] animate-gradient-x'
+                      : 'bg-gradient-to-r from-accent to-primary animate-pulse-slow'
+                  }`}
                 >
-                  <Zap size={17} fill="currentColor" />
-                  Comprar Agora
+                  <Zap size={18} fill="currentColor" />
+                  {isPromo ? `🔥 Garantir Oferta · ${promoLabel}` : 'Pedir Agora'}
                 </button>
               </div>
               <p className="hidden md:flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-3">
                 🔒 Compra 100% segura · 🚚 Enviamos para todo Brasil
               </p>
             </div>
+
           </div>
         </div>
 
