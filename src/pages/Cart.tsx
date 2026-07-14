@@ -155,6 +155,7 @@ const Cart = () => {
       </div>
 
       <BottomNav />
+      <WhatsAppLeadModal open={waOpen} onOpenChange={setWaOpen} mode="order" />
     </div>
   );
 };
