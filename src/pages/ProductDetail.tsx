@@ -259,7 +259,7 @@ const ProductDetail = () => {
                 </button>
               </div>
               <p className="hidden md:flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-3">
-                🔒 Compra 100% segura · 🚚 Enviamos para todo Brasil
+                🔒 Compra 100% segura · 🛵 Entrega local em até 30 min (Goiânia e Aparecida)
               </p>
             </div>
 

@@ -62,7 +62,7 @@ const Index = () => {
         <div className="mx-4 mt-6 grid grid-cols-3 gap-3">
           {[
             { icon: <ShieldCheck size={18} />, text: 'Segurinha 🔒' },
-            { icon: <Truck size={18} />, text: 'Vai pro Brasil 📦' },
+            { icon: <Truck size={18} />, text: 'Entrega rápida 🛵' },
             { icon: <CreditCard size={18} />, text: 'Pix & Cartão 💳' },
           ].map((item, i) => (
             <div key={i} className="bg-card rounded-xl border border-border p-3 flex flex-col items-center gap-1.5 text-center shadow-sm">
@@ -206,8 +206,8 @@ const Index = () => {
                 <Truck size={20} className="text-primary" />
               </div>
               <div>
-                <p className="text-sm font-bold text-foreground">Enviamos pro Brasil todinho 💗</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Frete calculado no checkout</p>
+                <p className="text-sm font-bold text-foreground">⚡ Entrega local rápida 🛵</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Até 30 min via app · Goiânia e Aparecida</p>
               </div>
             </div>
             <div className="bg-card rounded-xl border border-border p-4 shadow-sm flex items-center gap-4">
@@ -229,7 +229,7 @@ const Index = () => {
               <div className="flex flex-col items-center md:items-start gap-3">
                 <img src="/logo.png" alt="Sam Esthetic" className="h-12 w-auto" />
                 <p className="text-xs text-muted-foreground text-center md:text-left leading-relaxed max-w-[320px]">
-                  Especialistas em materiais para Lash Design e Nail Designer. Qualidade premium com os melhores preços do Brasil.
+                  Especialistas em materiais para Lash Design e Nail Designer. Entrega local rápida em Goiânia e Aparecida de Goiânia — receba em até 30 minutos.
                 </p>
                 <p className="font-hand text-xl text-primary">feito com 💗 em Goiânia</p>
               </div>
