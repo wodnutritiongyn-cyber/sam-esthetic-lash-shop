@@ -206,8 +206,8 @@ const Index = () => {
                 <Truck size={20} className="text-primary" />
               </div>
               <div>
-                <p className="text-sm font-bold text-foreground">Enviamos pro Brasil todinho 💗</p>
-                <p className="text-xs text-muted-foreground mt-0.5">Frete calculado no checkout</p>
+                <p className="text-sm font-bold text-foreground">⚡ Entrega local rápida 🛵</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Até 30 min via app · Goiânia e Aparecida</p>
               </div>
             </div>
             <div className="bg-card rounded-xl border border-border p-4 shadow-sm flex items-center gap-4">
