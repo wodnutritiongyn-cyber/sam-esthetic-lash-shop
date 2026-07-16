@@ -141,7 +141,6 @@ const ProductDetail = () => {
               </span>
               <h1 className="text-xl md:text-2xl font-extrabold text-foreground mt-1.5 leading-tight">{product.name}</h1>
 
-
               <div className="mt-4">
                 {product.originalPrice && (
                   <span className="text-xs text-muted-foreground line-through">
