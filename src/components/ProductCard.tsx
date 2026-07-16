@@ -4,7 +4,7 @@ import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { toast } from 'sonner';
 import StarRating from './StarRating';
-import { getProductRating, getRecentSales } from '@/lib/socialProof';
+import { getProductRating } from '@/lib/socialProof';
 
 interface Props {
   product: Product;
@@ -15,7 +15,6 @@ const ProductCard = ({ product, index = 0 }: Props) => {
   const navigate = useNavigate();
   const { addItem } = useCart();
   const { rating, reviewCount } = getProductRating(product.id);
-  const recentSales = getRecentSales(product.id);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
