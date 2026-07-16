@@ -91,9 +91,6 @@ const ProductDetail = () => {
   };
 
   const { rating, reviewCount } = getProductRating(product.id);
-  
-  const stockLeft = getStockLeft(product.id);
-  const viewersNow = getViewersNow(product.id);
 
   return (
     <div className="min-h-screen bg-background pb-44 md:pb-8">
