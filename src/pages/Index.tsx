@@ -62,7 +62,7 @@ const Index = () => {
         <div className="mx-4 mt-6 grid grid-cols-3 gap-3">
           {[
             { icon: <ShieldCheck size={18} />, text: 'Segurinha 🔒' },
-            { icon: <Truck size={18} />, text: 'Vai pro Brasil 📦' },
+            { icon: <Truck size={18} />, text: 'Entrega rápida 🛵' },
             { icon: <CreditCard size={18} />, text: 'Pix & Cartão 💳' },
           ].map((item, i) => (
             <div key={i} className="bg-card rounded-xl border border-border p-3 flex flex-col items-center gap-1.5 text-center shadow-sm">
