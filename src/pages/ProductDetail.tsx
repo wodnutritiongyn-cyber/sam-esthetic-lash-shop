@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Minus, Plus, Share2, Zap, Flame } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Minus, Plus, Share2, Zap } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
 import { useProducts, useProductBySlug } from '@/hooks/useProducts';
 import { useCart } from '@/contexts/CartContext';
@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import ProductCard from '@/components/ProductCard';
-import StarRating from '@/components/StarRating';
 import { getProductRating } from '@/lib/socialProof';
 import { useCountdown, pad } from '@/hooks/useCountdown';
 
@@ -90,7 +89,7 @@ const ProductDetail = () => {
     navigate('/checkout');
   };
 
-  const { rating, reviewCount } = getProductRating(product.id);
+  
 
   return (
     <div className="min-h-screen bg-background pb-44 md:pb-8">
