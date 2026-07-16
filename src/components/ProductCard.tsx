@@ -88,10 +88,6 @@ const ProductCard = ({ product, index = 0 }: Props) => {
             <ShoppingBag size={14} strokeWidth={2.5} />
           </button>
         </div>
-        <p className="text-[10px] text-green-600 font-bold mt-1.5 flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-          {recentSales} vendidos hoje
-        </p>
         <button
           onClick={handleBuyNow}
           className="mt-2 w-full bg-gradient-to-r from-accent to-primary text-white py-2 rounded-lg font-bold text-[11px] flex items-center justify-center gap-1 active:scale-95 transition-all hover:shadow-md"
