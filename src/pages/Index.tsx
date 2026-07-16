@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Truck, ShieldCheck, CreditCard, Leaf } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import whatsappIcon from '@/assets/whatsapp-icon.png';
@@ -27,11 +27,23 @@ const Index = () => {
   const navigate = useNavigate();
   const { products } = useProducts();
   const featured = products.filter(p => p.featured);
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
 
   useEffect(() => {
     if (sessionStorage.getItem('visit_tracked')) return;
     sessionStorage.setItem('visit_tracked', '1');
     supabase.functions.invoke('track-visit').catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    supabase
+      .from('blog_posts')
+      .select('id, title, slug, excerpt, cover_image, published_at')
+      .eq('status', 'published')
+      .lte('published_at', new Date().toISOString())
+      .order('published_at', { ascending: false })
+      .limit(3)
+      .then(({ data }) => setBlogPosts(data || []));
   }, []);
 
   return (
