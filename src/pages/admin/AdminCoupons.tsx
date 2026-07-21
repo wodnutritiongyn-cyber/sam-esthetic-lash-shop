@@ -43,9 +43,9 @@ const AdminCoupons = () => {
   const [editing, setEditing] = useState<Coupon | null>(null);
   const [form, setForm] = useState<Omit<Coupon, 'id' | 'created_at'>>(empty);
 
-  const call = async (action: string, opts: RequestInit = {}) => {
+  const call = async (action: string, body?: any) => {
     const { data, error } = await supabase.functions.invoke(`admin-coupons?action=${action}`, {
-      ...opts,
+      body,
       headers: { Authorization: `Bearer ${token}` },
     });
     if (error) throw error;
@@ -100,10 +100,10 @@ const AdminCoupons = () => {
     try {
       const payload = { ...form, code: form.code.trim().toUpperCase() };
       if (editing) {
-        await call('update', { body: { id: editing.id, ...payload } });
+        await call('update', { id: editing.id, ...payload });
         toast.success('Cupom atualizado! 💗');
       } else {
-        await call('create', { body: payload });
+        await call('create', payload);
         toast.success('Cupom criado! 💗');
       }
       setDialogOpen(false);
@@ -131,7 +131,7 @@ const AdminCoupons = () => {
 
   const toggle = async (c: Coupon, field: 'active' | 'show_in_popup', value: boolean) => {
     try {
-      await call('update', { body: { id: c.id, [field]: value } });
+      await call('update', { id: c.id, [field]: value });
       load();
     } catch {
       toast.error('Erro ao atualizar');
