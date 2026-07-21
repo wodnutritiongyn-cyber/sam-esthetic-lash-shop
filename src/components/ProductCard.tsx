@@ -63,10 +63,17 @@ const ProductCard = ({ product, index = 0 }: Props) => {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        {discount && (
+        {discount && !outOfStock && (
           <span className="absolute top-2 left-2 bg-accent text-accent-foreground text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-sm">
             -{discount}%
           </span>
+        )}
+        {outOfStock && (
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <span className="bg-white/95 text-foreground text-[11px] font-extrabold px-3 py-1.5 rounded-lg uppercase tracking-wider shadow">
+              Esgotado
+            </span>
+          </div>
         )}
       </div>
       <div className="p-3 flex flex-col flex-1">
