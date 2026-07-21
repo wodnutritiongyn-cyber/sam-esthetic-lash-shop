@@ -111,10 +111,19 @@ const SortableProductRow = ({ product: p, catLabel, onEdit, onDelete, onToggleAc
 
       {/* Name + mobile info */}
       <div className="flex-1 min-w-0 w-full">
-        <p className="text-sm font-medium text-slate-900 truncate">{p.name}</p>
+        <p className="text-sm font-medium text-slate-900 truncate flex items-center gap-1.5">
+          {p.name}
+          {(p.stock ?? 0) <= 0 && (
+            <span className="text-[9px] font-bold bg-red-100 text-red-700 px-1.5 py-0.5 rounded uppercase">Esgotado</span>
+          )}
+          {(p.stock ?? 0) > 0 && (p.stock ?? 0) <= 3 && (
+            <span className="text-[9px] font-bold bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">Baixo · {p.stock}</span>
+          )}
+        </p>
         <div className="flex items-center gap-2 md:hidden mt-0.5">
           <span className="text-xs text-slate-500">{catLabel(p.category)}</span>
           <span className="text-xs font-semibold text-slate-800">R$ {Number(p.price).toFixed(2)}</span>
+          <span className="text-xs text-slate-500">Est: {p.stock ?? 0}</span>
           {p.featured && <Badge className="bg-primary text-[10px] px-1 py-0 h-4">Destaque</Badge>}
         </div>
       </div>
